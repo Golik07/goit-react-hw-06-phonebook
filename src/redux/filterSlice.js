@@ -1,5 +1,4 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
-import { createObjectTodo } from './helpers';
+import { createSlice } from '@reduxjs/toolkit';
 
 const contactsSlice = createSlice({
   name: 'myFilterContacts',

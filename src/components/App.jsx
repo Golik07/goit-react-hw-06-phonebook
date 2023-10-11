@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
 import ContactForm from './Form';
 import List from './List/List';
 import FilterContact from './Filter/Filter';
