@@ -24,7 +24,7 @@ const contactsSlice = createSlice({
 export const myContactsReducer = contactsSlice.reducer;
 
 const persistConfig = {
-  key: 'root',
+  key: 'contacts',
   storage,
 };
 
