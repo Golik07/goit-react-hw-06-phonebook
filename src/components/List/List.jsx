@@ -1,34 +1,38 @@
+import { deleteContacts } from 'redux/contactsSlice';
+import Item from './Item/Item';
+import { useDispatch, useSelector } from 'react-redux';
 
-import Item from "./Item/Item"
-import PropTypes from "prop-types"
+const List = () => {
+  const dispatch = useDispatch();
+  const { contacts } = useSelector(state => state.contacts);
+  const { filter } = useSelector(state => state);
 
+  const handleDelete = id => {
+    dispatch(deleteContacts(id));
+  };
 
-const List = ({contacts,handleDelete}) => {
-    return (
-        <ul>
-            {contacts.map(({id,number,name}) => (
-                <Item 
-                id={id}
-                key={id}
-                name={name}
-                number={number}
-                handleDelete={handleDelete}
-                ></Item>
-            ))}
-        </ul>
-    )
-}
+  const getVisibleContacts = () => {
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+  };
 
+  const visibleContacts = getVisibleContacts();
 
-List.propTypes = {
-    contacts: PropTypes.arrayOf(
-        PropTypes.shape({
-            id:PropTypes.string.isRequired,
-            number:PropTypes.string.isRequired,
-            name:PropTypes.string.isRequired,
-        })
-    ),
-    handleDelete: PropTypes.func.isRequired,
-}
+  return (
+    <ul>
+      {visibleContacts.map(({ id, number, name }) => (
+        <Item
+          id={id}
+          key={id}
+          name={name}
+          number={number}
+          handleDelete={handleDelete}
+        ></Item>
+      ))}
+    </ul>
+  );
+};
 
-export default List
+export default List;
